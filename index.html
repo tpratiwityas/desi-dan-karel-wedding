@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Wedding Desi & Karel - Digital Gift</title>
+    <title>Happy Wedding Desi & Karel</title>
     
     <!-- Tailwind CSS & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'biru-langit': '#e0f2fe',
-                        'biru-laut': '#0284c7',
-                        'biru-gelap': '#0c4a6e',
-                        'premium-white': '#f8fafc'
+                        'ocean-light': '#f0f7ff',
+                        'ocean-slate': '#4b6b94',
+                        'ocean-deep': '#1e324f',
+                        'ocean-royal': '#2b446c',
                     },
                     fontFamily: {
                         'serif-wedding': ['"Great Vibes"', 'cursive'],
@@ -29,210 +29,240 @@
         }
     </script>
     <style>
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
-        }
-        .heart-animation {
-            position: fixed;
-            bottom: 0;
-            color: #ef4444;
-            animation: floatUp 3s linear forwards;
+        /* Animasi Efek Ketuk Partikel */
+        .sparkle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: bold;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             pointer-events: none;
-            z-index: 999;
+            animation: pingSparkle 1s ease-out forwards;
+            z-index: 9999;
+        }
+        @keyframes pingSparkle {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -100%) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
-<body class="bg-gradient-to-b from-[#f0fdf4] via-[#ecfeff] to-[#f0f9ff] font-sans-modern text-slate-800 antialiased overflow-x-hidden">
+<body onclick="createSparkle(event)" class="bg-gradient-to-b from-ocean-light via-[#dbeafe] to-[#cbd5e1] font-sans-modern text-slate-800 antialiased overflow-x-hidden min-h-screen">
 
-    <!-- AUDIO SOURCE -->
+    <!-- AUDIO SOURCE - Versi Piano Adem & Rileks -->
     <audio id="weddingMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- TOMBOL MUSIK -->
-    <button id="musicBtn" onclick="toggleMusic()" class="hidden fixed top-4 right-4 z-40 bg-white/80 backdrop-blur-md text-biru-laut p-3 rounded-full shadow-lg border border-sky-100 transition-all">
-        <i id="musicIcon" class="fa-solid fa-compact-disc fa-spin text-xl"></i>
+    <!-- TOMBOL MUSIK ELEGAN -->
+    <button id="musicBtn" onclick="toggleMusic(event)" class="hidden fixed top-4 right-4 z-40 bg-white/90 backdrop-blur-md text-ocean-royal p-3 rounded-full shadow-md border border-slate-200/50 transition-all">
+        <i id="musicIcon" class="fa-solid fa-music animate-pulse"></i>
     </button>
 
-    <!-- 1. COVER BUKA KADO -->
-    <section id="cover" class="fixed inset-0 bg-gradient-to-tr from-biru-gelap via-biru-laut to-sky-400 z-50 flex flex-col items-center justify-center text-center p-6 transition-all duration-1000">
-        <div class="text-white text-6xl mb-6 animate-bounce">
-            <i class="fa-solid fa-gift text-amber-300"></i>
+
+    <!-- ================= 1. COVER EXCLUSIVE ================= -->
+    <section id="cover" class="fixed inset-0 bg-gradient-to-tr from-ocean-deep via-ocean-royal to-ocean-slate z-50 flex flex-col items-center justify-center text-center p-6 transition-all duration-1000">
+        <div class="text-white/40 text-4xl mb-4">
+            <i class="fa-solid fa-circle-nodes"></i>
         </div>
-        <p class="tracking-widest text-sky-200 font-semibold uppercase text-xs mb-2">A Special Wedding Gift</p>
-        <h1 class="font-serif-wedding text-6xl text-white my-2">Desi & Karel</h1>
-        <p class="text-xs text-sky-100 max-w-xs mb-8 font-light">Ketuk tombol di bawah untuk membuka bingkisan kenangan manis ini.</p>
+        <p class="tracking-widest text-sky-200 font-medium uppercase text-[10px] mb-2">A Special Wedding Gift</p>
+        <h1 class="font-serif-wedding text-6xl text-white my-1">Desi & Karel</h1>
+        <p class="text-xs text-slate-300 max-w-xs mb-8 font-light">Ketuk untuk masuk ke ruang kenangan indah.</p>
         
-        <button onclick="bukaKado()" class="bg-white text-biru-gelap hover:bg-sky-100 px-8 py-3.5 rounded-full shadow-2xl text-sm font-bold tracking-wide flex items-center gap-2 transition-all transform active:scale-95">
-            <i class="fa-solid fa-box-open text-amber-500"></i> Buka Kado Spesial
+        <button onclick="bukaKado()" class="bg-white/10 text-white border border-white/30 hover:bg-white hover:text-ocean-deep px-8 py-3 rounded-full shadow-2xl text-xs font-semibold tracking-wider flex items-center gap-2 transition-all backdrop-blur-sm">
+            Buka Bingkisan <i class="fa-solid fa-arrow-right text-[10px]"></i>
         </button>
     </section>
 
-    <!-- MAIN CONTAINER KHUSUS HP -->
+
+    <!-- ================= MAIN HP CONTAINER ================= -->
     <main class="max-w-md mx-auto px-4 pt-12 pb-24 space-y-16">
 
-        <!-- 2. HERO / FOTO AWAL -->
+        <!-- ================= 2. HERO / UTAMA ================= -->
         <section class="text-center space-y-6">
-            <div class="inline-block px-4 py-1.5 bg-white/60 backdrop-blur-sm text-biru-laut rounded-full text-xs font-bold tracking-wider border border-white shadow-sm">
-                🎉 HAPPY WEDDING DAY 🎉
+            <div class="inline-block px-4 py-1 bg-ocean-royal/10 text-ocean-royal rounded-full text-[10px] font-bold tracking-widest uppercase">
+                Happy Wedding Celebration
             </div>
             
-            <h1 class="font-serif-wedding text-6xl text-biru-gelap">Desi & Karel</h1>
-            <p class="text-xs text-biru-laut font-semibold tracking-widest bg-sky-100/50 inline-block px-4 py-1 rounded-full">22 JULI 2026</p>
+            <h1 class="font-serif-wedding text-6xl text-ocean-deep">Desi & Karel</h1>
+            <p class="text-[11px] text-white font-semibold tracking-widest bg-ocean-slate px-4 py-1 rounded-full inline-block shadow-sm">22 JULI 2026</p>
 
-            <!-- Foto Utama Sudah Menggunakan foto.jpeg -->
-            <div class="relative p-3 bg-white rounded-3xl shadow-2xl border border-sky-100">
-                <div class="w-full h-80 rounded-2xl overflow-hidden shadow-inner">
-                    <img src="foto.jpeg" alt="Desi & Karel" class="w-full h-full object-cover">
-                </div>
-                <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-biru-laut to-sky-500 text-white px-6 py-2 rounded-full text-xs font-bold shadow-md whitespace-nowrap">
-                    True Love Lasts Forever ✨
+            <!-- Foto Utama Pasangan (Sesuai foto.jpeg) -->
+            <div class="relative p-3 bg-white rounded-3xl shadow-xl border border-slate-100">
+                <div class="w-full h-80 rounded-2xl overflow-hidden shadow-inner bg-slate-100">
+                    <img src="foto.jpeg" alt="Desi & Karel Main Photo" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
 
-        <!-- 3. LOVE JOURNEY (TIMELINE) -->
-        <section class="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white">
+
+        <!-- ================= 3. KISAH JALAN CINTA ================= -->
+        <section class="bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-lg border border-white/50">
             <div class="text-center mb-8">
-                <i class="fa-solid fa-route text-biru-laut text-2xl mb-1"></i>
-                <h2 class="font-serif-wedding text-4xl text-biru-gelap">Kisah Cinta Kalian</h2>
-                <p class="text-[11px] text-slate-400">Bagaimana satu cerita indah terbentuk</p>
+                <h2 class="font-serif-wedding text-4xl text-ocean-deep">The Journey</h2>
+                <p class="text-[10px] text-slate-400 uppercase tracking-wider">Lembaran Cerita Indah</p>
             </div>
 
-            <div class="relative border-l-2 border-dashed border-sky-300 ml-4 space-y-8">
+            <div class="relative border-l border-slate-300 ml-4 space-y-8">
                 <div class="relative pl-6">
-                    <span class="absolute -left-[9px] top-1 bg-sky-400 w-4 h-4 rounded-full border-2 border-white shadow"></span>
-                    <span class="text-[10px] font-bold text-biru-laut bg-sky-50 px-2 py-0.5 rounded">Awal Cerita</span>
-                    <h4 class="text-sm font-bold text-slate-800 mt-1">Pertama Kali Menyapa ☕</h4>
-                    <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Berawal dari pertemuan tidak sengaja, mata saling melirik, hingga akhirnya obrolan kecil mencairkan segalanya.</p>
+                    <span class="absolute -left-[5px] top-1 bg-ocean-slate w-2 h-2 rounded-full"></span>
+                    <span class="text-[10px] font-bold text-ocean-slate block">Awal Mula</span>
+                    <h4 class="text-xs font-semibold text-slate-800 mt-0.5">Pertemuan Pertama</h4>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Berawal dari sebuah skenario manis, mata saling menyapa, membawa getaran tenang yang tidak pernah diduga sebelumnya.</p>
                 </div>
                 <div class="relative pl-6">
-                    <span class="absolute -left-[9px] top-1 bg-sky-500 w-4 h-4 rounded-full border-2 border-white shadow"></span>
-                    <span class="text-[10px] font-bold text-biru-laut bg-sky-50 px-2 py-0.5 rounded">Proses</span>
-                    <h4 class="text-sm font-bold text-slate-800 mt-1">Satu Visi & Komitmen 💍</h4>
-                    <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Bukan lagi tentang "aku" atau "kamu", tapi tentang "kita" yang berjanji saling menjaga di segala musim kehidupan.</p>
+                    <span class="absolute -left-[5px] top-1 bg-ocean-royal w-2 h-2 rounded-full"></span>
+                    <span class="text-[10px] font-bold text-ocean-royal block">Ikatan</span>
+                    <h4 class="text-xs font-semibold text-slate-800 mt-0.5">Satu Visi & Komitmen</h4>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Menyatukan dua pemikiran berbeda menjadi satu tujuan yang kokoh, saling melengkapi di setiap situasi.</p>
                 </div>
                 <div class="relative pl-6">
-                    <span class="absolute -left-[9px] top-1 bg-biru-laut w-4 h-4 rounded-full border-2 border-white shadow animate-ping"></span>
-                    <span class="absolute -left-[9px] top-1 bg-biru-laut w-4 h-4 rounded-full border-2 border-white shadow"></span>
-                    <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">22 Juli 2026</span>
-                    <h4 class="text-sm font-bold text-slate-800 mt-1">Hari Kemenangan (Sah!) 🎉</h4>
-                    <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">Hari di mana janji suci diucapkan di depan saksi bumi dan langit. Selamat menempuh petualangan baru, Desi & Karel!</p>
+                    <span class="absolute -left-[5px] top-1 bg-emerald-500 w-2 h-2 rounded-full animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-emerald-600 block">Pelabuhan Terakhir</span>
+                    <h4 class="text-xs font-semibold text-slate-800 mt-0.5">Janji Suci Pernikahan</h4>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">22 Juli 2026 menjadi garis awal baru untuk melangkah bersama selamanya dalam ikatan yang sah.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 4. DIGITAL SCRAPBOOK (GALERI FOTO) -->
+
+        <!-- ================= 4. GALERI FOTO POLAROID ================= -->
         <section class="space-y-4">
             <div class="text-center">
-                <i class="fa-solid fa-camera-retro text-biru-laut text-2xl mb-1"></i>
-                <h2 class="font-serif-wedding text-4xl text-biru-gelap">Lembaran Kenangan</h2>
-                <p class="text-[11px] text-slate-400 mb-6">Setiap foto punya cerita bahagianya sendiri</p>
+                <h2 class="font-serif-wedding text-4xl text-ocean-deep">Memories</h2>
+                <p class="text-[10px] text-slate-400 uppercase tracking-wider mb-6">Momen Penuh Kebahagiaan</p>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-                <div class="bg-white p-3 pb-6 rounded-2xl shadow-md transform -rotate-2 hover:rotate-0 transition-all border border-sky-50">
-                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80" class="w-full h-36 object-cover rounded-xl" alt="Foto 1">
-                    <p class="font-serif-wedding text-xl text-center text-slate-600 mt-2">Senyumanmu</p>
+                <div class="bg-white p-3 pb-6 rounded-2xl shadow-sm border border-slate-100 transform -rotate-1">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover rounded-xl" alt="Memory 1">
+                    <p class="font-serif-wedding text-lg text-center text-slate-500 mt-2">Senyuman</p>
                 </div>
-                <div class="bg-white p-3 pb-6 rounded-2xl shadow-md transform rotate-3 hover:rotate-0 transition-all border border-sky-50">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" class="w-full h-36 object-cover rounded-xl" alt="Foto 2">
-                    <p class="font-serif-wedding text-xl text-center text-slate-600 mt-2">Genggaman Kita</p>
+                <div class="bg-white p-3 pb-6 rounded-2xl shadow-sm border border-slate-100 transform rotate-2">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80" class="w-full h-32 object-cover rounded-xl" alt="Memory 2">
+                    <p class="font-serif-wedding text-lg text-center text-slate-500 mt-2">Kebersamaan</p>
                 </div>
-                <div class="bg-white p-3 pb-6 rounded-2xl shadow-md transform rotate-1 hover:rotate-0 transition-all border border-sky-50 col-span-2">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" class="w-full h-44 object-cover rounded-xl" alt="Foto 3">
-                    <p class="font-serif-wedding text-2xl text-center text-slate-600 mt-2">Menuju Selamanya</p>
+
+                <!-- Bagian Gambar Request Kamu: Berubah jadi foto2.jpeg berdasarkan image_e4819b.png -->
+                <div class="bg-white p-3 pb-5 rounded-2xl shadow-md border border-slate-100 col-span-2">
+                    <img src="foto2.jpeg" class="w-full h-44 object-cover rounded-xl bg-slate-100" alt="Memory Menuju Selamanya">
+                    <p class="font-serif-wedding text-2xl text-center text-ocean-royal mt-2">Menuju Selamanya</p>
                 </div>
             </div>
         </section>
 
-        <!-- INTERAKSI SERU: INTERACTIVE LOVE METER -->
-        <section class="bg-gradient-to-r from-sky-400 to-biru-laut p-6 rounded-3xl text-center text-white shadow-xl relative overflow-hidden">
-            <div class="relative z-10">
-                <h3 class="font-bold text-base mb-1">Kirim Energi Cinta 💖</h3>
-                <p class="text-[11px] opacity-90 mb-4">Pencet tombol di bawah berulang kali untuk menerbangkan cinta di hari bahagia mereka!</p>
+
+        <!-- ================= INTERAKSI INTERAKTIF BARU: WISH GENERATOR ================= -->
+        <section class="bg-gradient-to-br from-ocean-royal to-ocean-deep p-6 rounded-3xl text-center text-white shadow-xl relative overflow-hidden">
+            <div class="relative z-10 space-y-3">
+                <span class="text-[9px] bg-white/20 px-3 py-1 rounded-full uppercase tracking-widest font-semibold">Interactive Feature</span>
+                <h3 class="text-sm font-semibold">Kotak Kebahagiaan ✨</h3>
                 
-                <button onclick="kirimCinta()" class="bg-white text-biru-laut font-bold px-6 py-2.5 rounded-full text-xs shadow-lg flex items-center gap-2 mx-auto active:scale-90 transition-all">
-                    <i class="fa-solid fa-heart text-red-500 animate-pulse"></i> Klik Disini! (<span id="loveCount">0</span>)
+                <!-- Area Teks Doa yang Berubah Otomatis -->
+                <div class="bg-white/10 p-4 rounded-xl min-h-[70px] flex items-center justify-center border border-white/10">
+                    <p id="blessingText" class="text-xs italic font-light leading-relaxed">"Ketuk tombol di bawah untuk memunculkan untaian doa kebahagiaan untuk pengantin."</p>
+                </div>
+                
+                <button onclick="generateWish(event)" class="bg-white text-ocean-deep text-xs font-bold px-6 py-2.5 rounded-full shadow-md hover:bg-slate-100 transition-all transform active:scale-95 mx-auto block">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Lihat Doa Pernikahan
                 </button>
             </div>
-            <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full"></div>
         </section>
 
-        <!-- 5. SURAT HARAPAN (BEST WISHES CARD) -->
-        <section class="bg-[#0284c7] p-1 rounded-3xl shadow-2xl">
-            <div class="bg-white p-6 rounded-[22px] space-y-4 border-2 border-dashed border-sky-200">
-                <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <span class="text-xs font-bold text-biru-laut tracking-widest uppercase"><i class="fa-solid fa-envelope-open-text mr-1"></i> Special Note</span>
-                    <span class="text-[10px] text-slate-400 font-mono">No. 22/07/2026</span>
-                </div>
 
-                <div class="space-y-3 text-xs text-slate-600 leading-relaxed font-light italic">
-                    <p class="font-bold text-slate-800 not-italic">Dear Desi & Karel,</p>
-                    <p>Selamat menempuh babak kehidupan yang baru! Rasanya luar biasa melihat kalian berdua akhirnya bersatu mengikat janji suci di tanggal 22 Juli 2026 ini.</p>
-                    <p>Pernikahan bukanlah garis finish, melainkan garis start sebuah petualangan hebat. Semoga rumah tangga kalian selalu dipenuhi canda tawa, kesabaran yang luas, rezeki yang berkah, dan cinta sedalam biru laut yang menenangkan.</p>
-                    <p>Ingatlah untuk selalu saling menggenggam tangan erat ketika ombak kehidupan datang menerpa. Kado digital sederhana ini dibuat khusus untuk mengenang senyum bahagia kalian hari ini.</p>
-                    <p class="text-right font-serif-wedding text-2xl text-biru-laut not-italic pt-4">— Dari Sahabat Terbaikmu ✨</p>
-                </div>
+        <!-- ================= 5. SURAT HARAPAN BARU (ELEGANT WISHES CARD) ================= -->
+        <section class="bg-gradient-to-b from-white to-slate-50 p-6 rounded-3xl shadow-xl border border-white/60 space-y-4">
+            <div class="text-center border-b border-slate-100 pb-3">
+                <h3 class="font-serif-wedding text-3xl text-ocean-royal">Doa Tulus</h3>
+            </div>
+
+            <div class="text-slate-600 text-xs leading-relaxed space-y-3 font-light text-center italic">
+                <p>"Selamat menempuh lembaran hidup yang baru, Desi & Karel."</p>
+                <p>Semoga pernikahan ini menjadi awal dari perjalanan panjang yang dipenuhi kedamaian, rasa saling menghargai, serta cinta yang selalu mekar layaknya ketenangan laut yang dalam.</p>
+                <p>Selamat menata masa depan bersama, saling menguatkan di kala badai, dan berbahagia di kala cerah. Doa terbaik menyertai setiap langkah perjalanan baru kalian berdua.</p>
+            </div>
+            <div class="text-center pt-2">
+                <span class="font-serif-wedding text-2xl text-ocean-slate">Best Wishes</span>
             </div>
         </section>
 
     </main>
 
+
     <!-- FOOTER -->
-    <footer class="py-8 bg-biru-gelap text-white text-center text-xs">
-        <p class="font-serif-wedding text-3xl text-sky-200 mb-1">Desi & Karel</p>
-        <p class="opacity-50 text-[10px] tracking-widest uppercase">Forever & Always Gift</p>
+    <footer class="py-8 bg-ocean-deep text-white/60 text-center text-[10px] tracking-wider uppercase">
+        <p class="font-serif-wedding text-2xl text-sky-200 lowercase tracking-normal mb-1">desi & karel</p>
+        <p>© 2026 Digital Wedding Album</p>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+
+    <!-- JAVASCRIPT SYSTEM -->
     <script>
         const audio = document.getElementById("weddingMusic");
         const musicIcon = document.getElementById("musicIcon");
-        let counter = 0;
+
+        // Daftar Doa Pernikahan Acak
+        const weddingWishes = [
+            "\"Semoga rumah tangga Desi & Karel selalu dipenuhi kedamaian, kebahagiaan sejati, dan kasih sayang yang tak bertepi.\"",
+            "\"Jadilah teman hidup yang saling menguatkan, saling mendengar, dan terus bertumbuh bersama hingga hari tua.\"",
+            "\"Semoga setiap hari yang kalian lalui membawa berkah baru, tawa yang lepas, dan keharmonisan yang hangat.\"",
+            "\"Selamat mengarungi samudra pernikahan. Semoga cinta kalian sedalam dan setenang biru laut.\"",
+            "\"Cinta sejati bukan mencari kesempurnaan, melainkan belajar merayakan ketidaksempurnaan bersama dengan indah.\""
+        ];
 
         function bukaKado() {
             const cover = document.getElementById("cover");
             cover.style.transform = "translateY(-100%)";
+            setTimeout(() => { cover.style.display = 'none'; }, 1000);
             
-            setTimeout(() => {
-                cover.style.display = 'none';
-            }, 1000);
-            
-            audio.play().catch(function(error) {
-                console.log("Autoplay blocked");
-            });
+            audio.play().catch(err => console.log("Autoplay blocked"));
             document.getElementById("musicBtn").classList.remove("hidden");
         }
 
-        function toggleMusic() {
+        function toggleMusic(e) {
+            e.stopPropagation(); // Mencegah efek sparkle terpicu saat klik tombol musik
             if (audio.paused) {
                 audio.play();
-                musicIcon.className = "fa-solid fa-compact-disc fa-spin text-xl";
+                musicIcon.className = "fa-solid fa-music animate-pulse";
             } else {
                 audio.pause();
-                musicIcon.className = "fa-solid fa-volume-xmark text-xl text-red-400";
+                musicIcon.className = "fa-solid fa-volume-xmark text-red-400";
             }
         }
 
-        function kirimCinta() {
-            counter++;
-            document.getElementById("loveCount").innerText = counter;
-
-            const heart = document.createElement("div");
-            heart.classList.add("heart-animation");
-            heart.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+        // Fungsi Interaksi Baru: Ganti Doa Acak
+        function generateWish(e) {
+            e.stopPropagation(); // Mencegah efek sparkle
+            const textElement = document.getElementById("blessingText");
+            const randomIndex = Math.floor(Math.random() * weddingWishes.length);
             
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = Math.random() * 20 + 15 + "px";
-            heart.style.animationDuration = Math.random() * 1 + 2 + "s";
-
-            document.body.appendChild(heart);
-
+            // Efek transisi teks sederhana
+            textElement.style.opacity = 0;
             setTimeout(() => {
-                heart.remove();
-            }, 3000);
+                textElement.innerText = weddingWishes[randomIndex];
+                textElement.style.opacity = 1;
+            }, 200);
+        }
+
+        // Fungsi Interaksi Baru: Partikel Sparkle saat Ketuk Layar HP
+        function createSparkle(e) {
+            for (let i = 0; i < 4; i++) {
+                const sparkle = document.createElement("div");
+                sparkle.classList.add("sparkle");
+                
+                // Atur posisi koordinat ketukan jari di layar
+                sparkle.style.left = e.pageX + 'px';
+                sparkle.style.top = e.pageY + 'px';
+                
+                // Variasi sebaran acak sedikit
+                const randomX = (Math.random() - 0.5) * 30;
+                const randomY = (Math.random() - 0.5) * 30;
+                sparkle.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => { sparkle.remove(); }, 1000);
+            }
         }
     </script>
 </body>
